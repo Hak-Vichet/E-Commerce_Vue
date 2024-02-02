@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="max-w-[1024px] mx-auto">
     <!-- <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
@@ -13,10 +13,12 @@
     <!-- <HelloWorld msg="You did it!" /> -->
 
     <NavBar />
+
+    <RouterView />
     
   </header>
 
-  <RouterView />
+  
 </template>
 
 

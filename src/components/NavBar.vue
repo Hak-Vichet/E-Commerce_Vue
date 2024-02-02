@@ -1,19 +1,81 @@
 <template>
-  <div class="flex items-center">
-    <div class="p-3 text-2xl font-bold">sneakers</div>
-        <router-link to="/" class="p-3 ml-4 text-gray-500">Collections</router-link>
-        <router-link to="/men" class="p-3 ml-4 text-gray-500">Men</router-link>
-        <router-link to="/women" class="p-3 ml-4 text-gray-500">Women</router-link>
-        <router-link to="/about" class="p-3 ml-4 text-gray-500">About</router-link>
-        <router-link to="/contact" class="p-3 ml-4 text-gray-500">Contact</router-link>
+  <nav class="px-10">
+    <div class="hidden md:flex items-center">
+      <router-link to="/" class="py-7 text-2xl font-bold border-b-[3px]">sneakers</router-link>
+      <router-link
+        to="/"
+        class="px-3 py-8 ml-4 text-gray-500 focus:border-b-[3px] focus:border-orange-400"
+        >Collections</router-link
+      >
+      <router-link
+        to="/men"
+        class="px-3 py-8 ml-4 text-gray-500 focus:border-b-[3px] focus:border-orange-400"
+        >Men</router-link
+      >
+      <router-link
+        to="/women"
+        class="px-3 py-8 ml-4 text-gray-500 focus:border-b-[3px] focus:border-orange-400"
+        >Women</router-link
+      >
+      <router-link
+        to="/about"
+        class="px-3 py-8 ml-4 text-gray-500 focus:border-b-[3px] focus:border-orange-400"
+        >About</router-link
+      >
+      <router-link
+        to="/contact"
+        class="px-3 py-8 ml-4 text-gray-500 focus:border-b-[3px] focus:border-orange-400"
+        >Contact</router-link
+      >
 
-    <div>
-        
+      <div></div>
     </div>
-  </div>
+
+    <div class="w-full h-[2px] bg-gray-200 mt-[-1px]"></div>
+
+    <div class="md:hidden mt-4">
+      <div
+        v-if="isMobileMenuOpen"
+        class="absolute w-2/3 right-0 ml-10 mt-10 bg-gray-200 flex flex-col items-center"
+      >
+        <router-link to="/">Collections</router-link>
+        <router-link to="/men">Men</router-link>
+        <router-link to="/women">Women</router-link>
+        <router-link to="/about">About</router-link>
+        <router-link to="/contact">Contact</router-link>
+      </div>
+
+      <div class="flex justify-between">
+        <div class="text-2xl font-bold">sneakers</div>
+
+        <button @click="toggleMobileMenu" class="text-gray-600">
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16m-7 6h7"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
 </template>
 
 <script setup lang="ts">
-import { RouterLink} from 'vue-router'
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
+const isMobileMenuOpen = ref(false)
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value
+}
 </script>
