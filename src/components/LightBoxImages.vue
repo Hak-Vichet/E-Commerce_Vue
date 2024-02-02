@@ -55,7 +55,7 @@
         {{ selectedImage.price }}.00
       </div>
 
-      <OrderProduct @decrese-price="calculatePrice1" @increase-price="calculatePrice2" />
+      <OrderProduct @decrese-price="calculatePrice1" @increase-price="calculatePrice2" @add-cart="addOrderToCard" :updateTheNumber="updateNumber" :totalPrice="totalPrice" />
     </div>
   </div>
 </template>
@@ -65,6 +65,7 @@ import { ref, reactive, type Ref } from 'vue';
 
 import OrderProduct from "@/components/OrderProduct.vue"
 
+
 interface Thumbnail {
   id: number;
   src: string;
@@ -73,11 +74,15 @@ interface Thumbnail {
   finalPrice: number;
 }
 
+
 const lightBoxOpen = ref(false);
+
+const updateNumber = ref(1)
+
 
 const thumbnails = ref<Thumbnail[]>([
   { id: 1, src: '/image-product-1.jpg', price: '$200', discount: '20%', finalPrice: 160 },
-  { id: 2, src: '/image-product-2.jpg', price: '$300', discount: '30%', finalPrice: 360 },
+  { id: 2, src: '/image-product-2.jpg', price: '$300', discount: '30%', finalPrice: 260 },
   { id: 3, src: '/image-product-3.jpg', price: '$400', discount: '10%', finalPrice: 360 },
   { id: 4, src: '/image-product-4.jpg', price: '$500', discount: '5%', finalPrice: 460 }
 ]);
@@ -90,14 +95,27 @@ const totalPrice = reactive({
 
 const calculatePrice1 = (number: number) => {
   totalPrice.finalPrice = number * selectedImage.value.finalPrice;
+  updateNumber.value = number
+  
 };
 
 const calculatePrice2 = (number: number) => {
   totalPrice.finalPrice = number * selectedImage.value.finalPrice;
+  updateNumber.value = number
 };
+
+const setNumberToOne = () => {
+    updateNumber.value = 1
+}
 
 const selectImage = (id: number) => {
   selectedImage.value = thumbnails.value.find((thumbnail) => thumbnail.id === id) || thumbnails.value[0];
+  calculatePrice2(1);
+  calculatePrice1(1);
+  setNumberToOne
+  
+
+//   emit('setNumberToZero') will use this with props 
 };
 
 const closeLightbox = () => {
@@ -107,5 +125,9 @@ const closeLightbox = () => {
 const openLightbox = () => {
   lightBoxOpen.value = true;
 };
+
+const addOrderToCard = () => {
+  
+}
 
 </script>

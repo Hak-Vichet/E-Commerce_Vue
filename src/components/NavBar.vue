@@ -28,7 +28,14 @@
         >Contact</router-link
       >
 
-      <div></div>
+      <div class="flex flex-1 shrink-0 gap-x-5 items-center justify-end">
+        <card-icon @click="showCard" />
+        <card-popup v-if="isShowCard"/>
+
+        <button>
+          <img src="/image-avatar.png" alt="profile" class="w-15 h-10 flex flex-shrink-0">
+        </button>
+      </div>
     </div>
 
     <div class="w-full h-[2px] bg-gray-200 mt-[-1px]"></div>
@@ -72,8 +79,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import CardIcon from '@/components/icons/cardIcon.vue'
+import CardPopup from '@/components/CartPopup.vue'
 
 const isMobileMenuOpen = ref(false)
+const isShowCard = ref(false)
+
+const showCard = () => {
+  isShowCard.value = !isShowCard.value
+}
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
